@@ -1,7 +1,7 @@
 import { expectType } from 'tsd-lite';
 import type { ObjectKeyPaths } from './ObjectKeyPaths';
 import { StrictEqual } from '../../__utils__/StrictEqual';
-import { simpleObj, arrObj, tupleObj } from '../../__mock__/data';
+import { simpleObj, arrObj, tupleObj } from '../../__mocks__/data';
 
 {
   type Result = ObjectKeyPaths<typeof simpleObj>;
