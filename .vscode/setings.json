@@ -1,0 +1,13 @@
+{
+  // format on save by prettier
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+
+  // auto fix on save
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+
+  // use TypeScript in node_modules
+  "typescript.tsdk": "./node_modules/typescript/lib"
+}
