@@ -10,7 +10,7 @@ const config: Config.InitialOptions = {
     ],
   },
   collectCoverage: false,
-  testMatch: ['**/*.test.[jt]s'],
+  testMatch: ['<rootDir>/src/**/*.test.[jt]s'],
   verbose: true,
 };
 

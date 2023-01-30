@@ -10,7 +10,7 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@babel/code-frame@^7.0.0", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.18.6":
+"@babel/code-frame@^7.0.0", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.15.8", "@babel/code-frame@^7.18.6":
   version "7.18.6"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.18.6.tgz#3b25d38c89600baa2dcc219edfa88a74eb2c427a"
   integrity sha512-TDCmlK5eOvH+eH7cdAFlNXeVJqWIQ7gW9tY1GJIpUtFb6CmjVyq2VM3u71bOyR8CRihcCgMUYoDNyLXao3+70Q==
@@ -600,6 +600,11 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.3.tgz#472eaab5f15c1ffdd7f8628bd4c4f753995ec79e"
   integrity sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==
 
+"@tsd/typescript@^4.9.4":
+  version "4.9.4"
+  resolved "https://registry.yarnpkg.com/@tsd/typescript/-/typescript-4.9.4.tgz#03ddbae4249621ee83bd496e701e6fec3c3d9944"
+  integrity sha512-70j1vy95LsMvciXWJLrQ9pQaaG1inJJ+gZ/dW/bPdzHUH1VTeSl3BBU6QxqFWh5IjPy6s7xHcUw45R71dw4J3w==
+
 "@types/babel__core@^7.1.14":
   version "7.20.0"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.20.0.tgz#61bc5a4cae505ce98e1e36c5445e4bee060d8891"
@@ -893,7 +898,7 @@ chalk@^2.0.0:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-chalk@^4.0.0:
+chalk@^4.0.0, chalk@^4.1.0, chalk@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
   integrity sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==
@@ -973,6 +978,15 @@ convert-source-map@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-2.0.0.tgz#4b560f649fc4e918dd0ab75cf4961e8bc882d82a"
   integrity sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==
+
+create-jest-runner@^0.12.0:
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/create-jest-runner/-/create-jest-runner-0.12.2.tgz#5b934d9a90a5b29ac56080139b9b913abb7a6ba2"
+  integrity sha512-laoTt/EHTa0MXXveZfwebaxprz1RdV5my2gvl01D3LcSb8nrXzfdflxHwkvwlcGt8/WO+i+MmEt7XBj++3e2jg==
+  dependencies:
+    chalk "^4.1.0"
+    jest-worker "^29.0.0"
+    p-limit "^3.1.0"
 
 create-require@^1.1.0:
   version "1.1.1"
@@ -1527,6 +1541,16 @@ jest-resolve@^29.4.1:
     resolve.exports "^2.0.0"
     slash "^3.0.0"
 
+jest-runner-tsd@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/jest-runner-tsd/-/jest-runner-tsd-4.0.0.tgz#313cc3ee2a046f37d54b352ed27418fa5e6918ca"
+  integrity sha512-Xy9wrMT7J7cAypWZggoeEwflLYRO7/1A4cK59VxgdSJ94BJSxAiYdncO4IJkmTvi2Mz/G01ZpDu1yjW6c9EBcw==
+  dependencies:
+    "@babel/code-frame" "^7.15.8"
+    chalk "^4.1.2"
+    create-jest-runner "^0.12.0"
+    tsd-lite "^0.6.0"
+
 jest-runner@^29.4.1:
   version "29.4.1"
   resolved "https://registry.yarnpkg.com/jest-runner/-/jest-runner-29.4.1.tgz#57460d9ebb0eea2e27eeddca1816cf8537469661"
@@ -1651,7 +1675,7 @@ jest-watcher@^29.4.1:
     jest-util "^29.4.1"
     string-length "^4.0.1"
 
-jest-worker@^29.4.1:
+jest-worker@^29.0.0, jest-worker@^29.4.1:
   version "29.4.1"
   resolved "https://registry.yarnpkg.com/jest-worker/-/jest-worker-29.4.1.tgz#7cb4a99a38975679600305650f86f4807460aab1"
   integrity sha512-O9doU/S1EBe+yp/mstQ0VpPwpv0Clgn68TkNwGxL6/usX/KUW9Arnn4ag8C3jc6qHcXznhsT5Na1liYzAsuAbQ==
@@ -2153,6 +2177,11 @@ ts-node@^10.9.1:
     make-error "^1.1.1"
     v8-compile-cache-lib "^3.0.1"
     yn "3.1.1"
+
+tsd-lite@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/tsd-lite/-/tsd-lite-0.6.0.tgz#17e4b706d413a77616c182bd5afdd7fdeaf9901f"
+  integrity sha512-jmFgQjXbiqbHn/zvShB/ND9NfnCFgiRED8F8xVVdQP58b/QylvxbWf01ofrwhvBpU0mTgN4jTs06laKpE9KEqA==
 
 type-detect@4.0.8:
   version "4.0.8"
