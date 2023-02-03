@@ -9,6 +9,9 @@ const config: Config.InitialOptions = {
       },
     ],
   },
+  moduleNameMapper: {
+    '^~/(.+)': '<rootDir>/src/$1',
+  },
   collectCoverage: false,
   testMatch: ['<rootDir>/src/**/*(?<!.tsd).test.[jt]s'],
   verbose: true,
