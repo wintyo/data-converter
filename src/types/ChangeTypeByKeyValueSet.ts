@@ -1,3 +1,4 @@
+import type { PrevNum } from '~/__utils__/PrevNum';
 import type { JoinObjectKey } from './JoinObjectKey';
 import type { ObjectKeyPaths } from './ObjectKeyPaths';
 
@@ -9,8 +10,12 @@ type FilterStartsWith<
 type ChangeTypeByKeyValueSetImpl<
   T,
   KeyValueSet extends Record<string, any>,
-  CurrentPath extends string = ''
-> = FilterStartsWith<keyof KeyValueSet, CurrentPath> extends never
+  CurrentPath extends string = '',
+  SearchableDepth extends number = 3
+> = [SearchableDepth] extends [never]
+  ? // no change type(return current T) if out of searchable depth count
+    T
+  : FilterStartsWith<keyof KeyValueSet, CurrentPath> extends never
   ? // no change type(return current T) if any KeyValueSet doesn't start with CurrentPath
     T
   : CurrentPath extends keyof KeyValueSet
@@ -20,16 +25,27 @@ type ChangeTypeByKeyValueSetImpl<
   ? number extends T['length']
     ? // case Array
       Array<
-        ChangeTypeByKeyValueSetImpl<T[number], KeyValueSet, `${CurrentPath}[]`>
+        ChangeTypeByKeyValueSetImpl<
+          T[number],
+          KeyValueSet,
+          `${CurrentPath}[]`,
+          PrevNum[SearchableDepth]
+        >
       >
     : // case Tuple
     T extends [...infer Rest, infer U]
     ? [
-        ...ChangeTypeByKeyValueSetImpl<Rest, KeyValueSet, CurrentPath>,
+        ...ChangeTypeByKeyValueSetImpl<
+          Rest,
+          KeyValueSet,
+          CurrentPath,
+          SearchableDepth
+        >,
         ChangeTypeByKeyValueSetImpl<
           U,
           KeyValueSet,
-          `${CurrentPath}[${Rest['length']}]`
+          `${CurrentPath}[${Rest['length']}]`,
+          PrevNum[SearchableDepth]
         >
       ]
     : T
@@ -41,16 +57,18 @@ type ChangeTypeByKeyValueSetImpl<
         ? ChangeTypeByKeyValueSetImpl<
             T[K],
             KeyValueSet,
-            JoinObjectKey<CurrentPath, K>
+            JoinObjectKey<CurrentPath, K>,
+            PrevNum[SearchableDepth]
           >
         : T[K];
     };
 
 export type ChangeTypeByKeyValueSet<
   T extends object,
-  KeyValueSet extends Partial<{ [K in ObjectKeyPaths<T>]: any }>
+  KeyValueSet extends Partial<{ [K in ObjectKeyPaths<T>]: any }>,
+  SearchableDepth extends number = 3
 > =
   // return never type if includes except KeyValueSet because notify unexpected keys
   Exclude<keyof KeyValueSet, ObjectKeyPaths<T>> extends never
-    ? ChangeTypeByKeyValueSetImpl<T, KeyValueSet>
+    ? ChangeTypeByKeyValueSetImpl<T, KeyValueSet, '', SearchableDepth>
     : never;
