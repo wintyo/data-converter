@@ -1,7 +1,7 @@
 import type { PrevNum } from '../__utils__/PrevNum';
 import type { JoinObjectKey } from './JoinObjectKey';
 
-export type ObjectKeyPaths<
+type ObjectKeyPathsImpl<
   T extends object,
   CurrentPath extends string = '',
   SearchableDepth extends number = 3
@@ -14,7 +14,11 @@ export type ObjectKeyPaths<
       ?
           | `${CurrentPath}[]`
           | (U extends object
-              ? ObjectKeyPaths<U, `${CurrentPath}[]`, PrevNum[SearchableDepth]>
+              ? ObjectKeyPathsImpl<
+                  U,
+                  `${CurrentPath}[]`,
+                  PrevNum[SearchableDepth]
+                >
               : never)
       : never
     : // case Tuple
@@ -22,13 +26,13 @@ export type ObjectKeyPaths<
     ?
         | `${CurrentPath}[${Rest['length']}]`
         | (U extends object
-            ? ObjectKeyPaths<
+            ? ObjectKeyPathsImpl<
                 U,
                 `${CurrentPath}[${Rest['length']}]`,
                 PrevNum[SearchableDepth]
               >
             : never)
-        | ObjectKeyPaths<Rest, CurrentPath, SearchableDepth>
+        | ObjectKeyPathsImpl<Rest, CurrentPath, SearchableDepth>
     : never
   : // case Object
     {
@@ -36,7 +40,7 @@ export type ObjectKeyPaths<
         ?
             | JoinObjectKey<CurrentPath, K>
             | (T[K] extends object
-                ? ObjectKeyPaths<
+                ? ObjectKeyPathsImpl<
                     T[K],
                     JoinObjectKey<CurrentPath, K>,
                     PrevNum[SearchableDepth]
@@ -44,3 +48,8 @@ export type ObjectKeyPaths<
                 : never)
         : never;
     }[keyof T];
+
+export type ObjectKeyPaths<
+  T extends object,
+  SearchableDepth extends number = 3
+> = ObjectKeyPathsImpl<T, '', SearchableDepth>;

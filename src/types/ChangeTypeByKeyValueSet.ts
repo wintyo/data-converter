@@ -65,7 +65,9 @@ type ChangeTypeByKeyValueSetImpl<
 
 export type ChangeTypeByKeyValueSet<
   T extends object,
-  KeyValueSet extends Partial<{ [K in ObjectKeyPaths<T>]: any }>,
+  KeyValueSet extends Partial<{
+    [K in ObjectKeyPaths<T, SearchableDepth>]: any;
+  }>,
   SearchableDepth extends number = 3
 > =
   // return never type if includes except KeyValueSet because notify unexpected keys

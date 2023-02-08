@@ -16,5 +16,5 @@ export type FilteredObjectKeyPaths<
 > = FilteredObjectKeyPathsImpl<
   T,
   TargetType,
-  ObjectKeyPaths<T, '', SearchableDepth>
+  ObjectKeyPaths<T, SearchableDepth>
 >;
