@@ -1,5 +1,3 @@
-import { simpleObj } from '~/__mocks__/data';
-
 import type { ObjectKeyPaths } from './ObjectKeyPaths';
 import type { GetTypeByPath } from './GetTypeByPath';
 
@@ -20,5 +18,3 @@ export type FilteredObjectKeyPaths<
   TargetType,
   ObjectKeyPaths<T, '', SearchableDepth>
 >;
-
-type result = FilteredObjectKeyPaths<typeof simpleObj, string>;
