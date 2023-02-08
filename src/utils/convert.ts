@@ -1,6 +1,6 @@
-import type { ObjectKeyPaths } from '~/types/ObjectKeyPaths';
-import type { ChangeTypeByKeyValueSet } from '~/types/ChangeTypeByKeyValueSet';
-import type { GetTypeByPath } from '~/types/GetTypeByPath';
+import type { ObjectKeyPaths } from '../types/ObjectKeyPaths';
+import type { ChangeTypeByKeyValueSet } from '../types/ChangeTypeByKeyValueSet';
+import type { GetTypeByPath } from '../types/GetTypeByPath';
 import { joinObjectKey } from './joinObjectKey';
 
 const convertImpl = (

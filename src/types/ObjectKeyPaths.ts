@@ -1,4 +1,4 @@
-import type { PrevNum } from '~/__utils__/PrevNum';
+import type { PrevNum } from '../__utils__/PrevNum';
 import type { JoinObjectKey } from './JoinObjectKey';
 
 export type ObjectKeyPaths<

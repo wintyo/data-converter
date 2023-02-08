@@ -1,4 +1,4 @@
-import { simpleObj, arrObj, tupleObj } from '~/__mocks__/data';
+import { simpleObj, arrObj, tupleObj } from '../__mocks__/data';
 import { convert } from './convert';
 
 describe('convert', () => {

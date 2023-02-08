@@ -1,4 +1,4 @@
-import type { FilteredObjectKeyPaths } from '~/types/FilteredObjectKeyPaths';
+import type { FilteredObjectKeyPaths } from '../types/FilteredObjectKeyPaths';
 import { convert } from './convert';
 
 export const createSpecificConverter = <Converter extends (value: any) => any>(
