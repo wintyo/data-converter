@@ -1,0 +1,31 @@
+name: Build and Publish
+on: push
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.12.1
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install
+        run: yarn install
+
+      - name: Test Utils
+        run: yarn test
+
+      - name: Test Types
+        run: yarn test:types
+
+      - name: Build
+        run: yarn build
+
+      - name: Publish
+        if: contains(github.ref, 'tags/v')
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
