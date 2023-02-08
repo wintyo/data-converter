@@ -1,9 +1,8 @@
-import type { ObjectKeyPaths } from '../types/ObjectKeyPaths';
+import type { ObjectKeyValueMap } from '../types/ObjectKeyValueMap';
 import type { ChangeTypeByKeyValueSet } from '../types/ChangeTypeByKeyValueSet';
-import type { GetTypeByPath } from '../types/GetTypeByPath';
 import { joinObjectKey } from './joinObjectKey';
 
-const convertImpl = (
+export const convertImpl = (
   obj: any,
   converterSet: Partial<Record<string, (value: any) => any>>,
   currentPath = ''
@@ -52,20 +51,29 @@ const convertImpl = (
   return obj;
 };
 
-type ConvertedMap<
+type GetConverterSet<
+  T extends object,
+  KeyValueMap extends ObjectKeyValueMap<T> = ObjectKeyValueMap<T>
+> = Partial<{
+  [K in keyof KeyValueMap]: (value: KeyValueMap[K]) => any;
+}>;
+
+type ReturnConvertedType<
+  T extends object,
   ConverterSet extends Partial<Record<string, (value: any) => any>>
-> = {
-  [K in keyof ConverterSet]: ReturnType<Exclude<ConverterSet[K], undefined>>;
-};
+> = ChangeTypeByKeyValueSet<
+  T,
+  {
+    [K in keyof ConverterSet]: ReturnType<Exclude<ConverterSet[K], undefined>>;
+  }
+>;
 
 export const convert = <
   T extends object,
-  ConverterSet extends Partial<{
-    [K in ObjectKeyPaths<T>]: (value: GetTypeByPath<T, K>) => any;
-  }>
+  ConverterSet extends GetConverterSet<T>
 >(
   obj: T,
   converterSet: ConverterSet
-): ChangeTypeByKeyValueSet<T, ConvertedMap<ConverterSet>> => {
+): ReturnConvertedType<T, ConverterSet> => {
   return convertImpl(obj, converterSet);
 };

@@ -1,5 +1,6 @@
 import type { FilteredObjectKeyPaths } from '../types/FilteredObjectKeyPaths';
-import { convert } from './convert';
+import type { ChangeTypeByKeyValueSet } from '../types/ChangeTypeByKeyValueSet';
+import { convertImpl } from './convert';
 
 export const createSpecificConverter = <Converter extends (value: any) => any>(
   converter: Converter
@@ -10,13 +11,16 @@ export const createSpecificConverter = <Converter extends (value: any) => any>(
   >(
     obj: T,
     keys: Keys
-  ) => {
+  ): ChangeTypeByKeyValueSet<
+    T,
+    Record<Keys[number], ReturnType<Converter>>
+  > => {
     const converterSet: Record<Keys[number], Converter> = Object.assign(
       {},
       ...keys.map((key) => ({
         [key]: converter,
       }))
     );
-    return convert(obj, converterSet);
+    return convertImpl(obj, converterSet);
   };
 };
