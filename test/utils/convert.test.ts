@@ -1,5 +1,5 @@
 import { simpleObj, arrObj, tupleObj } from '../__mocks__/data';
-import { convert } from './convert';
+import { convert } from '../../src/utils/convert';
 
 describe('convert', () => {
   it('simpleObj', () => {

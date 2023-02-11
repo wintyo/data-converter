@@ -1,5 +1,5 @@
 import { simpleObj, arrObj, tupleObj } from '../__mocks__/data';
-import { createSpecificConverter } from './createSpecificConverter';
+import { createSpecificConverter } from '../../src/utils/createSpecificConverter';
 
 describe('createSpecificConverter', () => {
   describe('convertDate', () => {

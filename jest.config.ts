@@ -13,7 +13,7 @@ const config: Config.InitialOptions = {
     '^~/(.+)': '<rootDir>/src/$1',
   },
   collectCoverage: false,
-  testMatch: ['<rootDir>/src/**/*(?<!.tsd).test.[jt]s'],
+  testMatch: ['<rootDir>/test/**/*(?<!.tsd).test.[jt]s'],
   verbose: true,
 };
 

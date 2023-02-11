@@ -16,7 +16,12 @@ const config: Configuration = {
       {
         test: /\.ts$/,
         exclude: /node_modules/,
-        loader: 'ts-loader',
+        use: {
+          loader: 'ts-loader',
+          options: {
+            configFile: 'tsconfig.webpack.config.json',
+          },
+        },
       },
     ],
   },

@@ -1,6 +1,6 @@
 import { expectType } from 'tsd-lite';
 import { StrictEqual } from '../__utils__/StrictEqual';
-import type { TupleUnionToObject } from './TupleUnionToObject';
+import type { TupleUnionToObject } from '../../src/types/TupleUnionToObject';
 
 {
   type Test = ['hoge', string] | ['fuga', number];

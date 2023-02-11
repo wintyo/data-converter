@@ -1,7 +1,7 @@
 import { expectType } from 'tsd-lite';
 import { simpleObj, arrObj, tupleObj } from '../__mocks__/data';
 import { StrictEqual } from '../__utils__/StrictEqual';
-import type { ObjectKeyValueMap } from './ObjectKeyValueMap';
+import type { ObjectKeyValueMap } from '../../src/types/ObjectKeyValueMap';
 
 {
   type Result = ObjectKeyValueMap<typeof simpleObj>;

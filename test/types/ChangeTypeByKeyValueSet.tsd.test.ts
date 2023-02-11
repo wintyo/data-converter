@@ -1,7 +1,7 @@
 import { expectType } from 'tsd-lite';
 import type { StrictEqual } from '../__utils__/StrictEqual';
 import { simpleObj, arrObj, tupleObj } from '../__mocks__/data';
-import type { ChangeTypeByKeyValueSet } from './ChangeTypeByKeyValueSet';
+import type { ChangeTypeByKeyValueSet } from '../../src/types/ChangeTypeByKeyValueSet';
 
 {
   type Result = ChangeTypeByKeyValueSet<
