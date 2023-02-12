@@ -52,4 +52,6 @@ type ObjectKeyPathsImpl<
 export type ObjectKeyPaths<
   T extends object,
   SearchableDepth extends number = 3
-> = ObjectKeyPathsImpl<T, '', SearchableDepth>;
+> =
+  // decrease 1 depth because this generics type can detect extra depth
+  ObjectKeyPathsImpl<T, '', PrevNum[SearchableDepth]>;

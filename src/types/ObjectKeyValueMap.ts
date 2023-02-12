@@ -53,4 +53,6 @@ type ObjectKeyValueUnion<
 export type ObjectKeyValueMap<
   T extends object,
   SearchableDepth extends number = 3
-> = TupleUnionToObject<ObjectKeyValueUnion<T, '', SearchableDepth>>;
+> =
+  // decrease 1 depth because this generics type can detect extra depth
+  TupleUnionToObject<ObjectKeyValueUnion<T, '', PrevNum[SearchableDepth]>>;

@@ -151,28 +151,26 @@ const veryDeepObj = {
       depth3: {
         depth4: {
           depth5: {
-            depth6: {
-              num: 0,
-              date: '2023-01-14T02:03:03.956Z',
-            },
+            num: 0,
+            date: '2023-01-14T02:03:03.956Z',
           },
         },
       },
     },
   },
-  deepArr: [[[[[['2023-01-14T02:03:03.956Z']]]]]],
+  deepArr: [[[[['2023-01-14T02:03:03.956Z']]]]],
 };
 
 const convertedData = convert(veryDeepObj, {
-  // you can pick up to 4 depth value
-  'depth1.depth2.depth3.depth4': (obj) => {
+  // you can pick up to 3 depth value
+  'depth1.depth2.depth3': (obj) => {
     // reuse convert to more deeply path
     return convert(obj, {
-      'depth5.depth6.date': (value) => new Date(value),
+      'depth4.depth5.date': (value) => new Date(value),
     });
   },
   // you can also array pattern
-  'deepArr[][][]': (arr) => {
+  'deepArr[][]': (arr) => {
     return convert(arr, {
       '[][][]': (value) => new Date(value),
     });
