@@ -12,15 +12,15 @@ type ChangeTypeByKeyValueSetImpl<
   KeyValueSet extends Record<string, any>,
   CurrentPath extends string = '',
   SearchableDepth extends number = 3
-> = [SearchableDepth] extends [never]
-  ? // no change type(return current T) if out of searchable depth count
-    T
-  : FilterStartsWith<keyof KeyValueSet, CurrentPath> extends never
+> = FilterStartsWith<keyof KeyValueSet, CurrentPath> extends never
   ? // no change type(return current T) if any KeyValueSet doesn't start with CurrentPath
     T
   : CurrentPath extends keyof KeyValueSet
   ? // change matched KeyValueSet if CurrentPath is perfectly matched by any KeyValueSet
     KeyValueSet[CurrentPath]
+  : [SearchableDepth] extends [never]
+  ? // no change type(return current T) if out of searchable depth count
+    T
   : T extends any[]
   ? number extends T['length']
     ? // case Array

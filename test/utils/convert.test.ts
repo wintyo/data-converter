@@ -1,4 +1,4 @@
-import { simpleObj, arrObj, tupleObj } from '../__mocks__/data';
+import { simpleObj, arrObj, tupleObj, veryDeepObj } from '../__mocks__/data';
 import { convert } from '../../src/utils/convert';
 
 describe('convert', () => {
@@ -62,6 +62,39 @@ describe('convert', () => {
           tupleObjDate: '2023-01-14T02:03:03.956Z',
         },
       ],
+    };
+    expect(result).toStrictEqual(expected);
+  });
+
+  it('veryDeepObj', () => {
+    const result = convert(veryDeepObj, {
+      'depth1.depth2.depth3.depth4': (obj) => {
+        return convert(obj, {
+          'depth5.depth6.date': (value) => new Date(value),
+        });
+      },
+      'deepArr[][][]': (arr) => {
+        return convert(arr, {
+          '[][][]': (value) => new Date(value),
+        });
+      },
+    });
+    const expected: typeof result = {
+      depth1: {
+        depth2: {
+          depth3: {
+            depth4: {
+              depth5: {
+                depth6: {
+                  num: 0,
+                  date: new Date('2023-01-14T02:03:03.956Z'),
+                },
+              },
+            },
+          },
+        },
+      },
+      deepArr: [[[[[[new Date('2023-01-14T02:03:03.956Z')]]]]]],
     };
     expect(result).toStrictEqual(expected);
   });
