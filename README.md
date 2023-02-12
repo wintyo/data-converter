@@ -142,7 +142,7 @@ const convertedData = convert(tupleObj, {
 
 #### very deep object
 
-This converter is up to 4 depth. If you want to convert more deeply object, You can use nest convert.
+This converter is up to 3 depth. If you want to convert more deeply object, You can use nest convert.
 
 ```typescript
 const veryDeepObj = {
