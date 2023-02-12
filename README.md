@@ -162,7 +162,7 @@ const veryDeepObj = {
 };
 
 const convertedData = convert(veryDeepObj, {
-  // you can pick up to 3 depth value
+  // you can choose path up to 3 depth
   'depth1.depth2.depth3': (obj) => {
     // reuse convert to more deeply path
     return convert(obj, {
