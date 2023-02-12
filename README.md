@@ -1,6 +1,6 @@
 # Data Converter
 
-TODO: Description
+Convert deeply object data by object path.
 
 ## Installation
 
@@ -138,6 +138,46 @@ const convertedData = convert(tupleObj, {
  *   ],
  * };
  */
+```
+
+#### very deep object
+
+This converter is up to 4 depth. If you want to convert more deeply object, You can use nest convert.
+
+```typescript
+const veryDeepObj = {
+  depth1: {
+    depth2: {
+      depth3: {
+        depth4: {
+          depth5: {
+            depth6: {
+              num: 0,
+              date: '2023-01-14T02:03:03.956Z',
+            },
+          },
+        },
+      },
+    },
+  },
+  deepArr: [[[[[['2023-01-14T02:03:03.956Z']]]]]],
+};
+
+const convertedData = convert(veryDeepObj, {
+  // you can pick up to 4 depth value
+  'depth1.depth2.depth3.depth4': (obj) => {
+    // reuse convert to more deeply path
+    return convert(obj, {
+      'depth5.depth6.date': (value) => new Date(value),
+    });
+  },
+  // you can also array pattern
+  'deepArr[][][]': (arr) => {
+    return convert(arr, {
+      '[][][]': (value) => new Date(value),
+    });
+  },
+});
 ```
 
 ### Convert specific type
